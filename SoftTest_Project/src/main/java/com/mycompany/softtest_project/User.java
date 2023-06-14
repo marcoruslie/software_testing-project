@@ -23,5 +23,37 @@ public class User {
         this.companyName = companyName;
         this.country = country;
     }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
     
 }
