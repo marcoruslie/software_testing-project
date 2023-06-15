@@ -24,9 +24,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SoftTest_Project {
     private static User user;
     private static WebDriver driver;
+    private static Element_Xpath eXpath = new Element_Xpath();
+
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", 
-        "C:\\Users\\ASUS\\Documents\\KuliahS6\\Software Testing\\chromedriver\\chromedriver.exe");
+        "C:\\Users\\andre\\Desktop\\Kuliah\\SEM 6\\SOFT TEST\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://gruplm.com/");
@@ -51,8 +53,9 @@ public class SoftTest_Project {
         elementToScrollTo.click();
 
         user = ReadCSV();
-        registerUser();
-        billingDetailUser();
+//        registerUser();
+//        billingDetailUser();
+        loginUser();
     }
     private static User ReadCSV() {
         String[] values={};
@@ -74,60 +77,43 @@ public class SoftTest_Project {
         }
     }
     private static void registerUser(){
-        String continueXPath = "/html/body/section[2]/div/div/div/div/form/div[6]/button";
-        String usernameXPath = "/html/body/section[2]/div/div/div/div/form/div[1]/input";
-        String emailXPath = "/html/body/section[2]/div/div/div/div/form/div[2]/input";
-        String passwordXPath = "/html/body/section[2]/div/div/div/div/form/div[3]/input";
-        String cPasswordXPath = "/html/body/section[2]/div/div/div/div/form/div[4]/input";  
-        WebElement editText = driver.findElement(By.xpath(usernameXPath));
+        WebElement editText = driver.findElement(By.xpath(eXpath.getUsernameXPath()));
         editText.sendKeys(user.getUsername());
-        editText = driver.findElement(By.xpath(emailXPath));
+        editText = driver.findElement(By.xpath(eXpath.getEmailXPath()));
         editText.sendKeys(user.getEmail());
-        editText = driver.findElement(By.xpath(passwordXPath));
+        editText = driver.findElement(By.xpath(eXpath.getPasswordXPath()));
         editText.sendKeys(user.getPassword());
-        editText = driver.findElement(By.xpath(cPasswordXPath));
+        editText = driver.findElement(By.xpath(eXpath.getCPasswordXPath()));
         editText.sendKeys(user.getPassword());
-        editText = driver.findElement(By.xpath(continueXPath));
+        editText = driver.findElement(By.xpath(eXpath.getContinueXPath()));
         editText.click();
     }
     private static void billingDetailUser(){
-        String firstNameXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[1]/div/input";
-        String lastNameXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[2]/div/input";
-        String phoneNumberXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[3]/div/input";
-        String companyNameXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[5]/div/input";
-        String streetAddressXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[6]/div/input";
-        String cityXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[7]/div/input";
-        String stateXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[8]/div/input";
-        String countryXpath = "/html/body/section[2]/div/form/div/div[1]/div[2]/div/div[9]/div/input";
-        String couponXpath = "/html/body/section[2]/div/form/div/div[2]/div/div[1]/div[2]/div/div/input";
-        String applyCouponXpath = "/html/body/section[2]/div/form/div/div[2]/div/div[1]/div[2]/div/div/div/span";
-        String paymentXpath = "/html/body/section[2]/div/form/div/div[2]/div/div[2]/div/div";
-        
         String coupon = "softwaretesting";
-        WebElement editText = driver.findElement(By.xpath(firstNameXpath));
+        WebElement editText = driver.findElement(By.xpath(eXpath.getFirstNameXpath()));
         editText.sendKeys(user.getFirstName());
-        editText = driver.findElement(By.xpath(lastNameXpath));
+        editText = driver.findElement(By.xpath(eXpath.getLastNameXpath()));
         editText.sendKeys(user.getLastName());
-        editText = driver.findElement(By.xpath(phoneNumberXpath));
+        editText = driver.findElement(By.xpath(eXpath.getPhoneNumberXpath()));
         editText.sendKeys(user.getPhoneNumber());
-        editText = driver.findElement(By.xpath(companyNameXpath));
+        editText = driver.findElement(By.xpath(eXpath.getCompanyNameXpath()));
         editText.sendKeys(user.getCompanyName());
-        editText = driver.findElement(By.xpath(streetAddressXpath));
+        editText = driver.findElement(By.xpath(eXpath.getStreetAddressXpath()));
         editText.sendKeys(user.getCountry()+" - Surabaya");
-        editText = driver.findElement(By.xpath(cityXpath));
+        editText = driver.findElement(By.xpath(eXpath.getCityXpath()));
         editText.sendKeys("surabaya");
-        editText = driver.findElement(By.xpath(stateXpath));
+        editText = driver.findElement(By.xpath(eXpath.getStateXpath()));
         editText.sendKeys("Jawa Timur");
-        editText = driver.findElement(By.xpath(countryXpath));
+        editText = driver.findElement(By.xpath(eXpath.getCountryXpath()));
         editText.sendKeys(user.getCountry());
-        editText = driver.findElement(By.xpath(couponXpath));
+        editText = driver.findElement(By.xpath(eXpath.getCouponXpath()));
         editText.sendKeys(coupon);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            
+
         }
-        editText = driver.findElement(By.xpath(applyCouponXpath));
+        editText = driver.findElement(By.xpath(eXpath.getApplyCouponXpath()));
         editText.click();
         
         WebDriverWait dWait = new WebDriverWait(driver, 10);
@@ -136,6 +122,23 @@ public class SoftTest_Project {
         editText.click();
         dWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/div/div/div[2]/a")));
         editText = driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/a"));
+        editText.click();
+    }
+    private static void loginUser(){
+        WebDriverWait dWait = new WebDriverWait(driver, 10);
+        dWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(eXpath.getLoginBtnHomeXpath())));
+        WebElement editText = driver.findElement(By.xpath(eXpath.getLoginBtnHomeXpath()));
+        editText.click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+
+        }
+        editText = driver.findElement(By.xpath(eXpath.getUsernameXPath()));
+        editText.sendKeys(user.getEmail());
+        editText = driver.findElement(By.xpath(eXpath.getEmailXPath()));
+        editText.sendKeys(user.getPassword());
+        editText = driver.findElement(By.xpath(eXpath.getLoginBtnXpath()));
         editText.click();
     }
 }

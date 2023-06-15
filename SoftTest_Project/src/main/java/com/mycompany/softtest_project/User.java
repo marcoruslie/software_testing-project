@@ -4,10 +4,15 @@
  */
 package com.mycompany.softtest_project;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author ASUS
  */
+@Getter
+@Setter
 public class User {
     private String username, email , password, firstName, 
             lastName, phoneNumber, companyName, country;
@@ -22,38 +27,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
         this.country = country;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getUsername() {
-        return username;
     }
     
 }
