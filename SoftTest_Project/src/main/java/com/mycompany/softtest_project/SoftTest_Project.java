@@ -67,17 +67,17 @@ public class SoftTest_Project {
         } catch (InterruptedException e) {
 
         }
-        WebElement themes = driver.findElement(By.xpath(eXpath.getThemes()));
-        themes.click();
-        WebElement selectTheme = driver.findElement(By.xpath(eXpath.getSelectTheme()));
-        selectTheme.click();
-        WebElement saveTheme = driver.findElement(By.xpath(eXpath.getSelectThemeButton()));
-        saveTheme.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-
-        }
+//        WebElement themes = driver.findElement(By.xpath(eXpath.getThemes()));
+//        themes.click();
+//        WebElement selectTheme = driver.findElement(By.xpath(eXpath.getSelectTheme()));
+//        selectTheme.click();
+//        WebElement saveTheme = driver.findElement(By.xpath(eXpath.getSelectThemeButton()));
+//        saveTheme.click();
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//
+//        }
         WebElement HomeSection = driver.findElement(By.xpath(eXpath.getHomeMenu()));
         HomeSection.click();
         try {
@@ -297,29 +297,94 @@ public class SoftTest_Project {
         }
         WebElement addItemBtn = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div[1]/a/div/div"));
         addItemBtn.click();
-        addItem();
-
+        for (int i = 1; i < 6; i++) {
+            addItem(i);
+        }
     }
-    static void addItem(){
+    static void addItem(int index){
         WebElement targetDropArea = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/div[2]/form"));
         String filePath = "C:\\Users\\andre\\Desktop\\Ga Penting\\130fe332c7dd9b35019c6fcea6426ed0.jpg";
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(filePath), null);
+        for (int i = 0; i < 1; i++) {
+            try {
+                Robot robot = new Robot();
+                robot.setAutoDelay(2000);
+                robot.mouseMove(targetDropArea.getLocation().getX()+200, targetDropArea.getLocation().getY()+150);
+                robot.setAutoDelay(1000);
+                robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
+                robot.keyPress(java.awt.event.KeyEvent.VK_V);
+                robot.keyRelease(java.awt.event.KeyEvent.VK_V);
+                robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
+                robot.keyPress(java.awt.event.KeyEvent.VK_ENTER);
+                robot.keyRelease(java.awt.event.KeyEvent.VK_ENTER);
+            }catch (AWTException e){
+                e.printStackTrace();
+            }
+        }
         try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+
+        }
+        WebElement itemThumbnail = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[1]/input"));
+        itemThumbnail.sendKeys("C:\\Users\\andre\\Desktop\\Ga Penting\\Untitled.png");
+        WebElement itemSlider = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[2]/input"));
+        itemSlider.sendKeys("C:\\Users\\andre\\Desktop\\Ga Penting\\Untitled.png");
+        WebElement itemType = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[4]/select"));
+        itemType.click();
+        itemType.sendKeys("File Download Link");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+
+        }
+        try{
             Robot robot = new Robot();
-            robot.setAutoDelay(2000);
-            robot.mouseMove(targetDropArea.getLocation().getX()+200, targetDropArea.getLocation().getY()+150);
-            robot.setAutoDelay(1000);
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-            robot.keyPress(java.awt.event.KeyEvent.VK_CONTROL);
-            robot.keyPress(java.awt.event.KeyEvent.VK_V);
-            robot.keyRelease(java.awt.event.KeyEvent.VK_V);
-            robot.keyRelease(java.awt.event.KeyEvent.VK_CONTROL);
-            robot.keyPress(java.awt.event.KeyEvent.VK_ENTER);
-            robot.keyRelease(java.awt.event.KeyEvent.VK_ENTER);
+            robot.mouseWheel(5);
         }catch (AWTException e){
             e.printStackTrace();
         }
+        WebElement itemDownloadLink = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[5]/div/div[2]/input"));
+        itemDownloadLink.sendKeys("https://www.google.com/");
+        WebElement itemStatus = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[6]/div[1]/div/select"));
+        itemStatus.click();
+        itemStatus.sendKeys("Show");
+        WebElement itemCurrPrice = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[6]/div[2]/div/input"));
+        itemCurrPrice.sendKeys("100");
+        WebElement itemPrevPrice = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[6]/div[3]/div/input"));
+        itemPrevPrice.sendKeys("200");
+        WebElement catSelect = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[7]/div/div[2]/div/div[1]/div[1]/div/select"));
+        catSelect.click();
+        catSelect.sendKeys("Category " + index);
+        WebElement subcatSelect = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[7]/div/div[2]/div/div[1]/div[2]/div/select"));
+        subcatSelect.click();
+        subcatSelect.sendKeys("Sub Category " + index);
+        WebElement itemTitle = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[7]/div/div[2]/div/div[1]/div[3]/div/input"));
+        itemTitle.sendKeys("Item Title " + index);
+        try{
+            Robot robot = new Robot();
+            robot.mouseWheel(5);
+        }catch (AWTException e){
+            e.printStackTrace();
+        }
+        WebElement itemSummary = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[7]/div/div[2]/div/div[2]/div[2]/div/textarea"));
+        itemSummary.sendKeys("Item Summary " + index);
+        try{
+            Robot robot = new Robot();
+            robot.mouseWheel(5);
+        }catch (AWTException e){
+            e.printStackTrace();
+        }
+        WebElement itemDesc = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[7]/div/div[2]/div/div[3]/div/div/div/div[3]/div[2]"));
+        itemDesc.click();
+        itemDesc.sendKeys("Item Description " + index);
+        WebElement itemMetaKeyword = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[2]/div/div/form/div[7]/div/div[2]/div/div[5]/div/div/textarea"));
+        itemMetaKeyword.click();
+        itemMetaKeyword.sendKeys("Item Meta Description " + index);
+        WebElement submitItemBtn = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div/div/div[3]/div/div/div/button"));
+        submitItemBtn.click();
     }
     static void addSubCat(int index){
         WebElement subCategoryLanguage = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[3]/div/div/div[2]/form/div[1]/select"));
